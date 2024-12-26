@@ -1,6 +1,7 @@
 import React, {  useState } from "react";
 import { useAppSelector, useAppDispatch } from "../store";
 import { logout } from "../store/userSlice";
+import { removePairs } from "../store/websocketSlice";
 import websocketManager from "../websocketManager";
 
 const Navbar: React.FC = () => {
@@ -9,6 +10,7 @@ const Navbar: React.FC = () => {
   const [isSocketEnable, setIsSocketEnable] = useState(false);
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(removePairs());
     websocketManager.disconnect();
   };
 
@@ -16,7 +18,7 @@ const Navbar: React.FC = () => {
   return (
     <nav>
       {isLoggedIn && (
-        <div>
+        <div style={{display:'flex'}}>
           <p>Welcome, {user?.username}!</p>
           <button onClick={handleLogout}>Logout</button>
           {isSocketEnable ? (

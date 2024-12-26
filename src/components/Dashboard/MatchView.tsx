@@ -37,9 +37,9 @@ interface MatchViewProps {
 
 const MatchViewTable: React.FC<MatchViewProps> = ({ pair, data }) => {
   return (
-    <TableContainer component={Paper} style={{ marginTop: "16px" }}>
+    <TableContainer component={Paper} style={{  }}>
       <Typography variant="h6" align="center" gutterBottom>
-        Match View - {pair}
+        Market View
       </Typography>
       <Table>
         <TableHead>

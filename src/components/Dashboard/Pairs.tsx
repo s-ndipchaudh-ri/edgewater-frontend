@@ -49,20 +49,22 @@ const PairsComponent: React.FC = () => {
             {pair}
           </label>
         ))}
+
       </div>
       <button
         onClick={handleUpdatePairs}
         style={{
-          padding: "10px 20px",
+        //   padding: "10px 20px",
           background: "green",
           color: "white",
           border: "none",
           cursor: "pointer",
-          marginTop: "20px",
+          marginBottom: "30px",
         }}
       >
         Update Pairs
       </button>
+  
     </div>
   );
 };

@@ -35,9 +35,9 @@ const PriceView: React.FC<{ pair: string; data: TickerData[] }> = ({
   data,
 }) => {
   return (
-    <TableContainer component={Paper} style={{ marginBottom: "16px" }}>
+    <TableContainer component={Paper} style={{ }}>
       <Typography variant="h6" align="center" gutterBottom>
-        {pair} Price Data
+        Price View
       </Typography>
       <Table>
         <TableHead>
