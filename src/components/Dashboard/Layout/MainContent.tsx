@@ -10,6 +10,7 @@ interface Props {
 const MainContent: React.FC<Props> = ({ selectedPair }) => {
   const { pairs } = useAppSelector((state) => state.websocket);
     const [price,setPrice] = useState(0);
+    const [pair,setPair] = useState([])
   const priceviewcols: any[] = [
     { col: "best_bid", alia: "Bid" },
     { col: "best_ask", alia: "Ask" },
@@ -24,15 +25,24 @@ const MainContent: React.FC<Props> = ({ selectedPair }) => {
   useEffect(()=>{
     
     if(pairs && selectedPair && pairs[selectedPair].length > 0){
-        setPrice(pairs[selectedPair][0].price)
+        setPair(pairs[selectedPair])
     }
   },[pairs,selectedPair])
 
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h5" gutterBottom>
-        {selectedPair
-          ? ` ${selectedPair} = ${price}`
+        {selectedPair && pair.length > 0 
+          ? (
+            <span>
+              {`${selectedPair} = ${pair[0].price} `}
+              {pair[0].price > pair[0].open_24h ? (
+                <span style={{ color: 'green', fontSize: '1.2rem' }}>▲</span>
+              ) : (
+                <span style={{ color: 'red', fontSize: '1.2rem' }}>▼</span>
+              )}
+            </span>
+          )
           : "Select a pair from the sidebar"}
       </Typography>
       <Grid container spacing={4} sx={{ mt: 1 }}>

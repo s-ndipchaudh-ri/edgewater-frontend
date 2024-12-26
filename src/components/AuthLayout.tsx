@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Grid, Card, CardContent, Tabs, Tab, Typography, Box } from "@mui/material";
+import {
+  Grid,
+  Card,
+  CardContent,
+  Tabs,
+  Tab,
+  Typography,
+  Box,
+} from "@mui/material";
 import Login from "./Login"; // Import the Login component
 import Register from "./Register"; // Import the Register component
 
@@ -70,13 +78,30 @@ const LoginPage: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Box sx={{ width: "80%" }}>
+          <Box
+            sx={{
+              width: "80%",
+              textAlign: "center", // Center align text and image
+            }}
+          >
             <Typography variant="h4" align="center" gutterBottom>
-              Extra Data Section
+              TradeNow
             </Typography>
-            <Typography variant="body1" align="center">
-              This section can include any extra data, images, or other content.
+            <Typography variant="body1" align="center" gutterBottom>
+              Traders most favorite platform.
             </Typography>
+            <Box
+              component="img"
+              src="/images/background.png" // Replace with the actual file path
+              alt="Extra Section"
+              sx={{
+                maxWidth: "100%", // Scale the image to fit within the container
+                height: "auto", // Maintain aspect ratio
+                marginTop: "16px",
+                borderRadius: "8px", // Optional: Add rounded corners
+                boxShadow: 3, // Optional: Add shadow for better visuals
+              }}
+            />
           </Box>
         </Grid>
       </Grid>

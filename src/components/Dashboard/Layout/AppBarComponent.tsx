@@ -24,7 +24,7 @@ const AppBarComponent: React.FC<Props> = ({ toggleLeftSidebar }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center' }}>
-          Coinbase
+          TradeNow
         </Typography>
         {/* <Button color="inherit" onClick={() => {websocketManager.connect(); setIsSocketEnable(true)}}>
           {
