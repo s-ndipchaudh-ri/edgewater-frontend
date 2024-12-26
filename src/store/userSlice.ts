@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import axiosInstance from "../axiosInstance";
+import websocketManager from "../websocketManager";
 
 interface User {
   username: string;
@@ -91,9 +92,12 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action: PayloadAction<User>) => {
+        localStorage.setItem('user',JSON.stringify(action.payload));
+        localStorage.setItem('access_token',action.payload.access_token);
         state.loading = false;
         state.user = action.payload;
         state.isLoggedIn = true;
+        websocketManager.connect()
       })
       .addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
@@ -105,11 +109,12 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action: PayloadAction<User>) => {
+        localStorage.setItem('user',JSON.stringify(action.payload));
+        localStorage.setItem('access_token',action.payload.access_token);
         state.loading = false;
         state.user = action.payload;
         state.isLoggedIn = true;
-        localStorage.setItem('user',JSON.stringify(action.payload));
-        localStorage.setItem('access_token',action.payload.access_token);
+        websocketManager.connect()
       })
       .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;

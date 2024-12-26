@@ -16,13 +16,16 @@ import { useDispatch } from 'react-redux';
 const allFxPairs = ['BTC-USD', 'ETH-USD', 'XRP-USD', 'LTC-USD'];
 
 const App: React.FC = () => {
-  websocketManager.connect()
+  
   const [selectedPair, setSelectedPair] = useState<string | null>(null);
   const [fxPairs, setFxPairs] = useState<string[]>(allFxPairs);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false); // Sidebar state
   const {user} = useAppSelector((state) => state.user)
   const dispatch = useDispatch();
+  useEffect(()=> {
+    websocketManager.connect()
+  },[])
   useEffect(()=>{
     if(user){
         
