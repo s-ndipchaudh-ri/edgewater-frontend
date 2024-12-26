@@ -77,7 +77,7 @@ const userSlice = createSlice({
       state.user = null;
       state.isLoggedIn = false;
       state.access_token = null;
-      
+
         // Clear localStorage
 
         localStorage.removeItem("access_token");
@@ -97,7 +97,8 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload.response || action.payload.errorResponse.errmsg || "Something went wrong.";
+
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -113,6 +114,7 @@ const userSlice = createSlice({
       .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload;
+        state.error = action.payload.response || "Something went wrong.";
       })
       .addCase(updateUserPairs.pending, (state) => {
         state.loading = true;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector, } from "../store";
 import { registerUser } from "../store/userSlice";
-import { TextField, InputAdornment, Button } from "@mui/material";
+import { TextField, InputAdornment, Button, Typography } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Email from "@mui/icons-material/Email";
 import Lock from "@mui/icons-material/Lock";
@@ -9,6 +9,7 @@ import Lock from "@mui/icons-material/Lock";
 const Register: React.FC = () => {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
   const dispatch = useAppDispatch();
+  const { error, loading } = useAppSelector((state) => state.user);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -25,7 +26,7 @@ const Register: React.FC = () => {
       style={{
         maxWidth: "400px",
         margin: "0 auto",
-        textAlign: "center", // Center-aligns the form
+        textAlign: "center",
       }}
     >
       <TextField
@@ -91,9 +92,15 @@ const Register: React.FC = () => {
           marginTop: "10px",
         }}
         fullWidth
+        disabled={loading}
       >
-        Register
+        {loading ? "Registering..." : "Register"}
       </Button>
+      {error && (
+        <Typography color="error" style={{ marginTop: "10px" }}>
+          {error}
+        </Typography>
+      )}
     </form>
   );
 };

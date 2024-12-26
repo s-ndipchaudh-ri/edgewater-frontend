@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Box, List, ListItem, ListItemText, Fab, Toolbar } from '@mui/material';
+import { Drawer, Box, List, ListItem, ListItemText, Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 interface Props {

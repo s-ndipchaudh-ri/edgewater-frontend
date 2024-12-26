@@ -9,7 +9,6 @@ interface Props {
 
 const MainContent: React.FC<Props> = ({ selectedPair }) => {
   const { pairs } = useAppSelector((state) => state.websocket);
-    const [price,setPrice] = useState(0);
     const [pair,setPair] = useState([])
   const priceviewcols: any[] = [
     { col: "best_bid", alia: "Bid" },

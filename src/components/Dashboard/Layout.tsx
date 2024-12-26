@@ -25,7 +25,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
-import { useAppDispatch, useAppSelector } from '../../store';
+import { useAppDispatch } from '../../store';
 import websocketManager from '../../websocketManager';
 import { logout } from '../../store/userSlice';
 import { removePairs } from '../../store/websocketSlice';
@@ -34,16 +34,13 @@ const allFxPairs = ['EUR/USD', 'USD/JPY', 'GBP/USD', 'AUD/USD', 'USD/CHF'];
 
 const App: React.FC = () => {
   const [selectedPair, setSelectedPair] = useState<string | null>(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isBottomDrawerOpen, setIsBottomDrawerOpen] = useState(false);
   const [fxPairs, setFxPairs] = useState<string[]>(allFxPairs);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedPairsInDialog, setSelectedPairsInDialog] = useState<string[]>(fxPairs);
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
 
-  const { isLoggedIn, user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const [isSocketEnable, setIsSocketEnable] = useState(false);
   
   const handleLogout = () => {
     dispatch(logout());

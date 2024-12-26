@@ -29,9 +29,6 @@ const LeftSidebar: React.FC<Props> = ({ isOpen }) => {
           <ListItem>
             <ListItemText primary="Name" secondary={`${user?.username}`} />
           </ListItem>
-          <ListItem>
-            <ListItemText primary="Email" secondary={`${user?.email}`} />
-          </ListItem>
         </List>
       </Box>
     </Drawer>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, useAppSelector } from "../../store";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../store";
 import { updateUserPairs } from "../../store/userSlice";
 import websocketManager from "../../websocketManager";
 

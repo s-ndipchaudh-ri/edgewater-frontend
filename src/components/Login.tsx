@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 import { loginUser } from "../store/userSlice";
-import { TextField, InputAdornment, Button } from "@mui/material";
+import { TextField, InputAdornment, Button, Typography } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Lock from "@mui/icons-material/Lock";
+import { RootState } from "../store"; // Adjust path as necessary
 
 const Login: React.FC = () => {
   const [form, setForm] = useState({ username: "", password: "" });
   const dispatch = useAppDispatch();
+  const { error, loading } = useAppSelector((state: RootState) => state.user);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,7 +26,7 @@ const Login: React.FC = () => {
       style={{
         maxWidth: "400px",
         margin: "0 auto",
-        textAlign: "center", // Center-aligns the content
+        textAlign: "center",
       }}
     >
       <TextField
@@ -72,9 +74,15 @@ const Login: React.FC = () => {
           marginTop: "10px",
         }}
         fullWidth
+        disabled={loading}
       >
-        Login
+        {loading ? "Logging in..." : "Login"}
       </Button>
+      {error && (
+        <Typography color="error" style={{ marginTop: "10px" }}>
+          {error}
+        </Typography>
+      )}
     </form>
   );
 };
