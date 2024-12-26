@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Auth from "./components/Auth";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Dashboard from "./components/Dashboard/Layout";
+import Dashboard from "./components/Dashboard/Layout.tsx";
 import { useAppSelector } from "./store";
+import AuthLayout from "./components/AuthLayout";
 
 
 
@@ -17,7 +18,7 @@ const App: React.FC = () => {
       <Routes>
       <Route
             path="/login"
-            element={isLoggedIn ? <Navigate to="/dashboard" replace /> : <Auth />}
+            element={isLoggedIn ? <Navigate to="/dashboard" replace /> : <AuthLayout />}
           />
         {/* Use ProtectedRoute for protected pages */}
         <Route

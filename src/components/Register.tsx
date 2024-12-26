@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../store";
 import { registerUser } from "../store/userSlice";
+import { TextField, InputAdornment, Button } from "@mui/material";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Email from "@mui/icons-material/Email";
+import Lock from "@mui/icons-material/Lock";
 
 const Register: React.FC = () => {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
@@ -16,47 +20,80 @@ const Register: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        maxWidth: "400px",
+        margin: "0 auto",
+        textAlign: "center", // Center-aligns the form
+      }}
+    >
+      <TextField
         type="text"
         name="username"
         placeholder="Username"
         value={form.username}
         onChange={handleChange}
         required
-        style={{ display: "block", margin: "10px auto", padding: "8px", width: "80%" }}
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AccountCircle />
+            </InputAdornment>
+          ),
+        }}
       />
-      <input
+      <TextField
         type="email"
         name="email"
         placeholder="Email"
         value={form.email}
         onChange={handleChange}
         required
-        style={{ display: "block", margin: "10px auto", padding: "8px", width: "80%" }}
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Email />
+            </InputAdornment>
+          ),
+        }}
       />
-      <input
+      <TextField
         type="password"
         name="password"
         placeholder="Password"
         value={form.password}
         onChange={handleChange}
         required
-        style={{ display: "block", margin: "10px auto", padding: "8px", width: "80%" }}
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Lock />
+            </InputAdornment>
+          ),
+        }}
       />
-      <button
+      <Button
         type="submit"
+        variant="contained"
+        color="success"
         style={{
           padding: "10px 20px",
-          background: "green",
-          color: "white",
-          border: "none",
-          cursor: "pointer",
           marginTop: "10px",
         }}
+        fullWidth
       >
         Register
-      </button>
+      </Button>
     </form>
   );
 };
