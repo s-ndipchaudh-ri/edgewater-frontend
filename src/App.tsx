@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Auth from "./components/Auth";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Dashboard from "./components/Dashboard/Layout.tsx";
+import Dashboard from "./components/Dashboard/Layout/index";
 import { useAppSelector } from "./store";
 import AuthLayout from "./components/AuthLayout";
 
