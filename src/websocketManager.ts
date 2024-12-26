@@ -18,7 +18,7 @@ class WebSocketManager {
       });
 
       this.socket.on("data", (data: string) => {
-        console.log("Received data:", data);
+        // console.log("Received data:", data);
         store.dispatch(addMessage(data)); // Dispatch the message to Redux
         store.dispatch(addPairs(JSON.parse(data)))
       });

@@ -11,7 +11,7 @@ const initialState: WebSocketState = {
   messages: [],
   pairs: {},
 };
-
+const noOfEntries: number = 10;
 const websocketSlice = createSlice({
   name: "websocket",
   initialState,
@@ -21,7 +21,7 @@ const websocketSlice = createSlice({
       state.messages.unshift(action.payload);
 
       // Keep only the latest 5 messages
-      if (state.messages.length > 5) {
+      if (state.messages.length > noOfEntries) {
         state.messages.pop();
       }
     },
@@ -41,7 +41,7 @@ const websocketSlice = createSlice({
       state.pairs[pair].unshift(data);
 
       // Keep only the latest 5 data objects for each pair
-      if (state.pairs[pair].length > 5) {
+      if (state.pairs[pair].length > noOfEntries) {
         state.pairs[pair].pop();
       }
 

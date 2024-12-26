@@ -1,8 +1,9 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAppDispatch } from '../../../store';
 import { logout } from '../../../store/userSlice';
+import websocketManager from '../../../websocketManager';
 
 interface Props {
   toggleLeftSidebar: () => void;
@@ -10,6 +11,7 @@ interface Props {
 
 const AppBarComponent: React.FC<Props> = ({ toggleLeftSidebar }) => {
   const dispatch = useAppDispatch();
+  const [isSocketEnable, setIsSocketEnable] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -24,6 +26,11 @@ const AppBarComponent: React.FC<Props> = ({ toggleLeftSidebar }) => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center' }}>
           Coinbase
         </Typography>
+        {/* <Button color="inherit" onClick={() => {websocketManager.connect(); setIsSocketEnable(true)}}>
+          {
+            isSocketEnable ? <>Disconnect</> : <>Connect</>
+          }
+        </Button> */}
         <Button color="inherit" onClick={handleLogout}>
           Logout
         </Button>

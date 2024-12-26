@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Toolbar } from '@mui/material';
 import AppBarComponent from './AppBarComponent';
 import LeftSidebar from './LeftSidebar';
@@ -6,22 +6,36 @@ import RightSidebar from './RightSidebar';
 import MainContent from './MainContent';
 import BottomDrawer from './BottomDrawer';
 import PairSelectionDialog from './PairSelectionDialog';
+import websocketManager from '../../../websocketManager';
+import { useAppSelector } from '../../../store';
+import { updateUserPairs } from "../../../store/userSlice";
+import { useDispatch } from 'react-redux';
 
-const allFxPairs = ['EUR/USD', 'USD/JPY', 'GBP/USD', 'AUD/USD', 'USD/CHF'];
+
+
+const allFxPairs = ['BTC-USD', 'ETH-USD', 'XRP-USD', 'LTC-USD'];
 
 const App: React.FC = () => {
+  websocketManager.connect()
   const [selectedPair, setSelectedPair] = useState<string | null>(null);
   const [fxPairs, setFxPairs] = useState<string[]>(allFxPairs);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false); // Sidebar state
-
+  const {user} = useAppSelector((state) => state.user)
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    if(user){
+        
+        setFxPairs(user.pairs)
+    }
+  },[user])
   const toggleDialog = () => setIsDialogOpen((prev) => !prev);
-
   const handlePairSelect = (pair: string) => {
     setSelectedPair(pair);
   };
-
   const applyPairSelection = (selectedPairs: string[]) => {
+    console.log(selectedPairs);
+    dispatch(updateUserPairs(selectedPairs))
     setFxPairs(selectedPairs);
     setIsDialogOpen(false);
   };
@@ -57,7 +71,8 @@ const App: React.FC = () => {
           flexGrow: 1,
           p: 3,
           position: 'relative', // Maintain its layout
-          zIndex: 1, // Keep it below the sidebar
+          zIndex: 1, // Keep it below the sidebar,
+          width:"80vw"
         }}
       >
         <Toolbar />

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Drawer, Box, Toolbar, Typography, Divider, List, ListItem, ListItemText } from '@mui/material';
+import { useAppSelector } from '../../../store';
 
 interface Props {
   isOpen: boolean;
 }
 
 const LeftSidebar: React.FC<Props> = ({ isOpen }) => {
+    const {user} = useAppSelector((state) => state.user)
   return (
     <Drawer
       variant="persistent"
@@ -25,10 +27,10 @@ const LeftSidebar: React.FC<Props> = ({ isOpen }) => {
         <Divider />
         <List>
           <ListItem>
-            <ListItemText primary="Name" secondary="John Doe" />
+            <ListItemText primary="Name" secondary={`${user?.username}`} />
           </ListItem>
           <ListItem>
-            <ListItemText primary="Email" secondary="johndoe@example.com" />
+            <ListItemText primary="Email" secondary={`${user?.email}`} />
           </ListItem>
         </List>
       </Box>
